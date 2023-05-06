@@ -8,29 +8,29 @@ import { ClipLoader } from 'react-spinners';
 import { ALL } from "../../contants/api";
 const CardInfo = () => {
   const [load, setLoad] = useState(false);
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
   const [info, setInfo] = useState([]);
 
 
   const { id } = useParams();
 
 
-  const fetchData = async () => {
-    setLoad(true)
+  const fetchData = async (id) => {
+    setLoad(true);
     try {
       const response = await axios.get(`${ALL}/alpha/${id}`)
-      setInfo(response.data)
+      setInfo(response.data);
     } catch (error) {
-      setError(error.message)
+      setError(error.message);
     }
-    finally {
-      setLoad(false)
+    finally { 
+      setLoad(false);
     }
   }
 
   useEffect(() => {
-    fetchData();
-  }, [id]);
+    fetchData(id);
+  }, [id])
 
 
   if (load) {
